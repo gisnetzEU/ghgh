@@ -25,4 +25,9 @@ public class View {
     @JoinColumn(name="MOVIE_FK")
     private Movie movie;
 
+    public View(User user, Movie movie) {
+        this.viewDateTime = LocalTime.now();
+        this.user = user;
+        this.movie = movie;
+    }
 }
