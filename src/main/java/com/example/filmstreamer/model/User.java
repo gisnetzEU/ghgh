@@ -32,4 +32,19 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
 
+    public User(String userEmail, int password, String userRol,
+                String userFirstName, String userLastName, LocalDate birthDate) {
+        this.userEmail = userEmail;
+        this.password = password;
+        this.userRol = userRol;
+        this.userFirstName = userFirstName;
+        this.userLastName = userLastName;
+        this.birthDate = birthDate;
+    }
+
+    public void addView(View view) {
+        this.views.add(view);
+        view.setUser(this);
+    }
+
 }

@@ -25,7 +25,7 @@ public class Movie {
     private String directing;
     @Column(name = "MOVIE_CASTING")
     private String casting;
-    @Column(name = "MOVIE_SYNOPSIS")
+    @Column(name = "MOVIE_SYNOPSIS", columnDefinition="TEXT")
     private String synopsis;
     @Column(name = "MOVIE_GENRE")
     private String genre;
@@ -35,4 +35,20 @@ public class Movie {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
 
+    public Movie(String title, int releaseYear, int duration, String directing,
+                 String casting, String synopsis, String genre, String ageRating) {
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.duration = duration;
+        this.directing = directing;
+        this.casting = casting;
+        this.synopsis = synopsis;
+        this.genre = genre;
+        this.ageRating = ageRating;
+    }
+
+    public void addView(View view) {
+        this.views.add(view);
+        view.setMovie(this);
+    }
 }
