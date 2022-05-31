@@ -36,12 +36,12 @@ public class ApplicationCommandRunner implements CommandLineRunner {
         //Scanner reader = new Scanner(System.in);
 
         // Faker DB date creator block
-        /*
+
         Faker faker = new Faker();
         createMoviesFaker(faker);
         createUsersFaker(faker);
         createViewsFaker(faker);
-        */
+
     }
 
     public void createMoviesFaker(Faker faker){

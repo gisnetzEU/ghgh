@@ -35,7 +35,7 @@ public class MovieRestController {
     }
 
         //CRUD: create movie
-        @PostMapping(path = "addMovie", consumes = "application/JSON")
+        @PostMapping(path = "/addMovie", consumes = "application/JSON")
         public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
             Optional<Movie> movieCreated = movieservice.createMovie(movie);
 
@@ -52,7 +52,7 @@ public class MovieRestController {
         }
 
        //CRUD: read, find one movie by id
-        @GetMapping(path = "getMovie")
+        @GetMapping(path = "/getMovie")
         public ResponseEntity<Movie> findMovieById(@RequestParam Long movieId) {
             Optional<Movie> movieFound = movieservice.findMovieById(movieId);
 
@@ -69,7 +69,7 @@ public class MovieRestController {
         }
 
        //CRUD: delete movie by id
-        @DeleteMapping(path = "deleteMovie")
+        @DeleteMapping(path = "/deleteMovie")
         public ResponseEntity<Movie> deleteMovie(@RequestParam Long movieId) {
             Optional<Movie> movieFound = movieservice.deleteMovieById(movieId);
 
@@ -86,7 +86,7 @@ public class MovieRestController {
         }
 
        //CRUD: update movie
-        @PutMapping(path = "updateMovie", consumes = "application/JSON")
+        @PutMapping(path = "/updateMovie", consumes = "application/JSON")
         public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
             Optional<Movie> movieFound = movieservice.findMovieById(movie.getMovieId());
             Optional<Movie> movieUpdate = movieFound;
@@ -163,7 +163,7 @@ public class MovieRestController {
         }
 
         //CRUD: read, find movies by title
-        @GetMapping(path = "getMoviesByTitle")
+        @GetMapping(path = "/getMoviesByTitle")
         public ResponseEntity<Iterable<Movie>> findMoviesByTitle(@RequestParam String title) {
             Optional<Iterable<Movie>> moviesFound = movieservice.findMoviesByTitle(title);
 

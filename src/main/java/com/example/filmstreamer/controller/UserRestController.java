@@ -36,7 +36,7 @@ public class UserRestController {
     }
 
     //CRUD: read, find one user by id
-    /*@GetMapping(path = "getUser")
+    @GetMapping(path = "/getUser")
     public ResponseEntity<User> findUserById(@RequestParam Long userId) {
         Optional<User> userFound = userservice.findUserById(userId);
 
@@ -53,7 +53,7 @@ public class UserRestController {
     }
 
     //CRUD: create
-    @PostMapping(path = "addUser", consumes = "application/JSON")
+    @PostMapping(path = "/addUser", consumes = "application/JSON")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         Optional<User> userCreated = userservice.createUser(user);
 
@@ -70,7 +70,7 @@ public class UserRestController {
     }
 
     //CRUD: delete book by id
-    @DeleteMapping(path = "deleteUser")
+    @DeleteMapping(path = "/deleteUser")
     public ResponseEntity<User> deleteUser(@RequestParam Long userId) {
         Optional<User> userFound = userservice.deleteUserById(userId);
 
@@ -87,50 +87,60 @@ public class UserRestController {
     }
 
     //CRUD: update
-    /*@PutMapping(path = "updateAuthor", consumes = "application/JSON")
-    public ResponseEntity<Author> updateAuthor(@RequestBody Author author) {
-        Optional<Author> authorFound = authorservice.findAuthorById(author.getAuthorId());
-        Optional<Author> authorUpdate = authorFound;
+    @PutMapping(path = "/updateUser", consumes = "application/JSON")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        Optional<User> userFound = userservice.findUserById(user.getUserId());
+        Optional<User> userUpdate = userFound;
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("operation", "updateAuthor");
+        headers.add("operation", "updateUser");
 
-        if (!authorFound.isPresent()) {
+        if (!userFound.isPresent()) {
             headers.add("operationStatus", "not found");
             return ResponseEntity.accepted().headers(headers).body(null);
-        } else if (author.equals(authorFound.get())) {
+        } else if (user.equals(userFound.get())) {
             headers.add("operationStatus", "no data to update");
             return ResponseEntity.accepted().headers(headers).body(null);
         } else {
             Boolean mustUpdate = false;
-            if(!author.getFirstName().equals(authorFound.get().getFirstName()) && !author.getFirstName().equals("")) {
-                authorUpdate.get().setFirstName(author.getFirstName());
-                headers.add("firstName", "to be updated");
+            if(!user.getUserFirstName().equals(userFound.get().getUserFirstName()) && !user.getUserFirstName().equals("")) {
+                userUpdate.get().setUserFirstName(user.getUserFirstName());
+                headers.add("user firstname", "to be updated");
                 mustUpdate = true;
             }
-            if(!author.getLastName().equals(authorFound.get().getLastName()) && !author.getLastName().equals("")) {
-                authorUpdate.get().setLastName(author.getLastName());
-                headers.add("lastName", "to be updated");
+            if(!user.getUserLastName().equals(userFound.get().getUserLastName()) && !user.getUserLastName().equals("")) {
+                userUpdate.get().setUserLastName(user.getUserLastName());
+                headers.add("user last name", "to be updated");
                 mustUpdate = true;
             }
-            if(!author.getDob().equals(authorFound.get().getDob()) && !author.getDob().equals("")) {
-                authorUpdate.get().setDob(author.getDob());
-                headers.add("Date of Birth", "to be updated");
+            if(!user.getBirthDate().equals(userFound.get().getBirthDate()) && !user.getBirthDate().equals("")) {
+                userUpdate.get().setBirthDate(user.getBirthDate());
+                headers.add("birthdate", "to be updated");
                 mustUpdate = true;
             }
-            if((author.getBooks() != authorFound.get().getBooks()) && (!author.getBooks().isEmpty())) {
-                authorUpdate.get().setBooks(author.getBooks());
-                headers.add("books", "to be updated");
+            if(!user.getUserRol().equals(userFound.get().getUserRol()) && !user.getUserRol().equals("")) {
+                userUpdate.get().setUserRol(user.getUserRol());
+                headers.add("user rol", "to be updated");
+                mustUpdate = true;
+            }
+            if(!user.getUserEmail().equals(userFound.get().getUserEmail()) && !user.getUserEmail().equals("")) {
+                userUpdate.get().setUserEmail(user.getUserEmail());
+                headers.add("user email", "to be updated");
+                mustUpdate = true;
+            }
+            if((user.getPassword() != userFound.get().getPassword()) && (user.getPassword() != 0)) {
+                userUpdate.get().setPassword(user.getPassword());
+                headers.add("password", "to be updated");
                 mustUpdate = true;
             }
             if (mustUpdate) {
                 headers.add("operationStatus", "updated");
-                return ResponseEntity.accepted().headers(headers).body(authorservice.updateAuthor(authorUpdate.get()).get());
+                return ResponseEntity.accepted().headers(headers).body(userservice.updateUser(userUpdate.get()).get());
             } else {
                 headers.add("operationStatus", "no valid data to update");
                 return ResponseEntity.accepted().headers(headers).body(null);
             }
         }
-    }*/
+    }
 
 }
