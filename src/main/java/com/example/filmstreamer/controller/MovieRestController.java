@@ -17,7 +17,7 @@ public class MovieRestController {
     MovieService movieservice;
 
     //here we are creating our end-point rest API
-    //CRUD: read
+    //CRUD: read all movies
     @GetMapping("/movies")
     public ResponseEntity<Iterable<Movie>> getAllMovies() {
         Optional<Iterable<Movie>> moviesRetrieved = movieservice.getAllMovies();
@@ -33,103 +33,128 @@ public class MovieRestController {
             return ResponseEntity.accepted().headers(headers).body(null);
         }
     }
-/*
-        //CRUD: create
-        @PostMapping(path = "addBook", consumes = "application/JSON")
-        public ResponseEntity<Book> addBook(@RequestBody Book book) {
-            Optional<Book> bookCreated = bookservice.createBook(book);
+
+        //CRUD: create movie
+        @PostMapping(path = "addMovie", consumes = "application/JSON")
+        public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+            Optional<Movie> movieCreated = movieservice.createMovie(movie);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("operation", "addBook");
+            headers.add("operation", "addMovie");
 
-            if (bookCreated.isPresent()) {
+            if (movieCreated.isPresent()) {
                 headers.add("operationStatus", "created");
-                return ResponseEntity.accepted().headers(headers).body(bookCreated.get());
+                return ResponseEntity.accepted().headers(headers).body(movieCreated.get());
             } else {
                 headers.add("operationStatus", "fail");
                 return ResponseEntity.accepted().headers(headers).body(null);
             }
         }
 
-        //CRUD: read, find one book by id
-        @GetMapping(path = "getBook")
-        public ResponseEntity<Book> findBookById(@RequestParam Long bookId) {
-            Optional<Book> bookFound = bookservice.findBookById(bookId);
+       //CRUD: read, find one movie by id
+        @GetMapping(path = "getMovie")
+        public ResponseEntity<Movie> findMovieById(@RequestParam Long movieId) {
+            Optional<Movie> movieFound = movieservice.findMovieById(movieId);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("operation", "getBook");
+            headers.add("operation", "getMovie");
 
-            if (bookFound.isPresent()) {
+            if (movieFound.isPresent()) {
                 headers.add("operationStatus", "found");
-                return ResponseEntity.accepted().headers(headers).body(bookFound.get());
+                return ResponseEntity.accepted().headers(headers).body(movieFound.get());
             } else {
                 headers.add("operationStatus", "fail");
                 return ResponseEntity.accepted().headers(headers).body(null);
             }
         }
 
-        //CRUD: delete book by id
-        @DeleteMapping(path = "deleteBook")
-        public ResponseEntity<Book> deleteBook(@RequestParam Long bookId) {
-            Optional<Book> bookFound = bookservice.deleteBookById(bookId);
+       //CRUD: delete movie by id
+        @DeleteMapping(path = "deleteMovie")
+        public ResponseEntity<Movie> deleteMovie(@RequestParam Long movieId) {
+            Optional<Movie> movieFound = movieservice.deleteMovieById(movieId);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("operation", "deleteBook");
+            headers.add("operation", "deleteMovie");
 
-            if (bookFound.isPresent()) {
+            if (movieFound.isPresent()) {
                 headers.add("operationStatus", "deleted");
-                return ResponseEntity.accepted().headers(headers).body(bookFound.get());
+                return ResponseEntity.accepted().headers(headers).body(movieFound.get());
             } else {
                 headers.add("operationStatus", "fail");
                 return ResponseEntity.accepted().headers(headers).body(null);
             }
         }
 
-        //CRUD: update
-        @PutMapping(path = "updateBook", consumes = "application/JSON")
-        public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-            Optional<Book> bookFound = bookservice.findBookById(book.getBookId());
-            Optional<Book> bookUpdate = bookFound;
+       //CRUD: update movie
+        @PutMapping(path = "updateMovie", consumes = "application/JSON")
+        public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
+            Optional<Movie> movieFound = movieservice.findMovieById(movie.getMovieId());
+            Optional<Movie> movieUpdate = movieFound;
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("operation", "updateBook");
+            headers.add("operation", "updateMovie");
 
-            if (!bookFound.isPresent()) {
+            if (!movieFound.isPresent()) {
                 headers.add("operationStatus", "not found");
                 return ResponseEntity.accepted().headers(headers).body(null);
-            } else if (book.equals(bookFound.get())) {
+            } else if (movie.equals(movieFound.get())) {
                 headers.add("operationStatus", "no data to update");
                 return ResponseEntity.accepted().headers(headers).body(null);
             } else {
                 Boolean mustUpdate = false;
-                if(!book.getAuthor().equals(bookFound.get().getAuthor()) && !book.getAuthor().equals("")) {
-                    bookUpdate.get().setAuthor(book.getAuthor());
-                    headers.add("author", "to be updated");
-                    mustUpdate = true;
-                }
-                if(!book.getTitle().equals(bookFound.get().getTitle()) && !book.getTitle().equals("")) {
-                    bookUpdate.get().setTitle(book.getTitle());
+                if(!movie.getTitle().equals(movieFound.get().getTitle()) && !movie.getTitle().equals("")) {
+                    movieUpdate.get().setTitle(movie.getTitle());
                     headers.add("title", "to be updated");
                     mustUpdate = true;
                 }
-                if(!book.getIsbn().equals(bookFound.get().getIsbn()) && !book.getIsbn().equals("")) {
-                    bookUpdate.get().setIsbn(book.getIsbn());
-                    headers.add("ISBN", "to be updated");
+                if(!movie.getCasting().equals(movieFound.get().getCasting()) && !movie.getCasting().equals("")) {
+                    movieUpdate.get().setCasting(movie.getCasting());
+                    headers.add("casting", "to be updated");
                     mustUpdate = true;
                 }
-                if((book.getPublishedYear() != bookFound.get().getPublishedYear()) && (book.getPublishedYear() != 0)) {
-                    bookUpdate.get().setPublishedYear(book.getPublishedYear());
-                    headers.add("published year", "to be updated");
+                if(!movie.getDirecting().equals(movieFound.get().getDirecting()) && !movie.getDirecting().equals("")) {
+                    movieUpdate.get().setDirecting(movie.getDirecting());
+                    headers.add("directing", "to be updated");
                     mustUpdate = true;
                 }
-                if((book.getPages() != bookFound.get().getPages()) && (book.getPages() != 0)) {
-                    bookUpdate.get().setIsbn(book.getIsbn());
-                    headers.add("pages", "to be updated");
+                if((movie.getReleaseYear() != movieFound.get().getReleaseYear()) && (movie.getReleaseYear() != 0)) {
+                    movieUpdate.get().setReleaseYear(movie.getReleaseYear());
+                    headers.add("release year", "to be updated");
+                    mustUpdate = true;
+                }
+                if((movie.getDuration() != movieFound.get().getDuration()) && (movie.getDuration() != 0)) {
+                    movieUpdate.get().setDuration(movie.getDuration());
+                    headers.add("duration", "to be updated");
+                    mustUpdate = true;
+                }
+                if(!movie.getSynopsis().equals(movieFound.get().getSynopsis()) && !movie.getSynopsis().equals("")) {
+                    movieUpdate.get().setSynopsis(movie.getSynopsis());
+                    headers.add("synopsis", "to be updated");
+                    mustUpdate = true;
+                }
+                if(!movie.getGenre().equals(movieFound.get().getGenre()) && !movie.getGenre().equals("")) {
+                    movieUpdate.get().setGenre(movie.getGenre());
+                    headers.add("genre", "to be updated");
+                    mustUpdate = true;
+                }
+                if(!movie.getAgeRating().equals(movieFound.get().getAgeRating()) && !movie.getAgeRating().equals("")) {
+                    movieUpdate.get().setAgeRating(movie.getAgeRating());
+                    headers.add("age rating", "to be updated");
+                    mustUpdate = true;
+                }
+                if(!movie.getPosterPath().equals(movieFound.get().getPosterPath()) && !movie.getPosterPath().equals("")) {
+                    movieUpdate.get().setPosterPath(movie.getPosterPath());
+                    headers.add("poster path", "to be updated");
+                    mustUpdate = true;
+                }
+                if(!movie.getVideoPath().equals(movieFound.get().getVideoPath()) && !movie.getVideoPath().equals("")) {
+                    movieUpdate.get().setVideoPath(movie.getVideoPath());
+                    headers.add("video path", "to be updated");
                     mustUpdate = true;
                 }
                 if (mustUpdate) {
                     headers.add("operationStatus", "updated");
-                    return ResponseEntity.accepted().headers(headers).body(bookservice.updateBook(bookUpdate.get()).get());
+                    return ResponseEntity.accepted().headers(headers).body(movieservice.updateMovie(movieUpdate.get()).get());
                 } else {
                     headers.add("operationStatus", "no valid data to update");
                     return ResponseEntity.accepted().headers(headers).body(null);
@@ -137,20 +162,20 @@ public class MovieRestController {
             }
         }
 
-        //CRUD: read, find one book by title
-        @GetMapping(path = "getBookByTitle")
-        public ResponseEntity<Iterable<Book>> findBooksByTitle(@RequestParam String title) {
-            Optional<Iterable<Book>> booksFound = bookservice.findBooksByTitle(title);
+        //CRUD: read, find movies by title
+        @GetMapping(path = "getMoviesByTitle")
+        public ResponseEntity<Iterable<Movie>> findMoviesByTitle(@RequestParam String title) {
+            Optional<Iterable<Movie>> moviesFound = movieservice.findMoviesByTitle(title);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("operation", "getBookByTitle");
+            headers.add("operation", "getMoviesByTitle");
 
-            if (booksFound.isPresent()) {
+            if (moviesFound.isPresent()) {
                 headers.add("operationStatus", "success");
-                return ResponseEntity.accepted().headers(headers).body(booksFound.get());
+                return ResponseEntity.accepted().headers(headers).body(moviesFound.get());
             } else {
                 headers.add("operationStatus", "not Found");
                 return ResponseEntity.accepted().headers(headers).body(null);
             }
-        }*/
+        }
 }
