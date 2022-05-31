@@ -1,9 +1,10 @@
 package com.example.filmstreamer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 @Entity(name="View")
@@ -15,19 +16,20 @@ public class View {
     @Column(name = "VIEW_ID")
     private long viewId;
     @Column(name = "VIEW_DATETIME")
-    private LocalTime viewDateTime;
+    private LocalDateTime viewDateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="USER_FK")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MOVIE_FK")
     private Movie movie;
 
     public View(User user, Movie movie) {
-        this.viewDateTime = LocalTime.now();
+        this.viewDateTime = LocalDateTime.now();
         this.user = user;
         this.movie = movie;
     }
+
 }
