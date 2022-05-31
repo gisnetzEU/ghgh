@@ -36,6 +36,7 @@ public class Movie {
     @Column(name = "VIDEO_PATH")
     private String videoPath;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
 

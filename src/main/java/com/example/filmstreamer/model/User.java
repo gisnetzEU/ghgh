@@ -2,6 +2,8 @@ package com.example.filmstreamer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class User {
     @Column(name = "USER_BIRTHDATE")
     private LocalDate birthDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
 
