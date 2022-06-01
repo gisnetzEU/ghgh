@@ -20,6 +20,7 @@ public class User {
     private long userId;
     @Column(name = "USER_EMAIL")
     private String userEmail;
+    @JsonIgnore
     @Column(name = "USER_PASSWORD")
     private int password;
     @Column(name = "USER_ROL")
