@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/movies")
@@ -53,7 +54,7 @@ public class MovieRestController {
 
        //CRUD: read, find one movie by id
         @GetMapping(path = "/getMovie")
-        public ResponseEntity<Movie> findMovieById(@RequestParam Long movieId) {
+        public ResponseEntity<Movie> findMovieById(@RequestParam UUID movieId) {
             Optional<Movie> movieFound = movieservice.findMovieById(movieId);
 
             HttpHeaders headers = new HttpHeaders();
@@ -70,7 +71,7 @@ public class MovieRestController {
 
        //CRUD: delete movie by id
         @DeleteMapping(path = "/deleteMovie")
-        public ResponseEntity<Movie> deleteMovie(@RequestParam Long movieId) {
+        public ResponseEntity<Movie> deleteMovie(@RequestParam UUID movieId) {
             Optional<Movie> movieFound = movieservice.deleteMovieById(movieId);
 
             HttpHeaders headers = new HttpHeaders();
@@ -88,7 +89,7 @@ public class MovieRestController {
        //CRUD: update movie
         @PutMapping(path = "/updateMovie", consumes = "application/JSON")
         public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
-            Optional<Movie> movieFound = movieservice.findMovieById(movie.getMovieId());
+            Optional<Movie> movieFound = movieservice.findMovieById(movie.getMovieUUID());
             Optional<Movie> movieUpdate = movieFound;
 
             HttpHeaders headers = new HttpHeaders();

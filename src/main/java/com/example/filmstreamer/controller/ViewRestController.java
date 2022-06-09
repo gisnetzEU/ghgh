@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
@@ -37,7 +38,7 @@ public class ViewRestController {
 
     //CRUD: read, find one view by id
     @GetMapping(path = "/getView")
-    public ResponseEntity<View> findViewById(@RequestParam Long viewId) {
+    public ResponseEntity<View> findViewById(@RequestParam UUID viewId) {
         Optional<View> viewFound = viewservice.findViewById(viewId);
 
         HttpHeaders headers = new HttpHeaders();

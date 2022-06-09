@@ -5,9 +5,7 @@ import com.example.filmstreamer.model.User;
 import com.example.filmstreamer.service.UserService;
 import com.example.filmstreamer.model.Movie;
 import com.example.filmstreamer.service.MovieService;
-import com.example.filmstreamer.model.View;
 import com.example.filmstreamer.service.ViewService;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 @Component
 public class ApplicationCommandRunner implements CommandLineRunner {
@@ -81,12 +78,11 @@ public class ApplicationCommandRunner implements CommandLineRunner {
 
     private void createViewsFaker(Faker faker) {
         logger.info("Welcome to the create views Faker");
+        Optional<Iterable<Movie>> movies= movieService.getAllMovies();
+        Optional<Iterable<User>> users = userService.getAllUsers();
         for (int i = 1; i <= 100; i++) {
-            Movie movie = movieService.findMovieById((long)i).get();
-            User user = userService.findUserById((long)i+100).get();
 
-            View view = new View(user, movie);
-            viewService.createView(view);
+
         }
         logger.info("finishing create views Faker ...");
     }

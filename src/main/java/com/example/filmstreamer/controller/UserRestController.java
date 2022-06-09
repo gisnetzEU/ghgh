@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 
 @RestController
@@ -37,8 +38,8 @@ public class UserRestController {
 
     //CRUD: read, find one user by id
     @GetMapping(path = "/getUser")
-    public ResponseEntity<User> findUserById(@RequestParam Long userId) {
-        Optional<User> userFound = userservice.findUserById(userId);
+    public ResponseEntity<User> findUserById(@RequestParam UUID userUUID) {
+        Optional<User> userFound = userservice.findUserById(userUUID);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("operation", "getUser");
@@ -71,7 +72,7 @@ public class UserRestController {
 
     //CRUD: delete book by id
     @DeleteMapping(path = "/deleteUser")
-    public ResponseEntity<User> deleteUser(@RequestParam Long userId) {
+    public ResponseEntity<User> deleteUser(@RequestParam UUID userId) {
         Optional<User> userFound = userservice.deleteUserById(userId);
 
         HttpHeaders headers = new HttpHeaders();
@@ -89,7 +90,7 @@ public class UserRestController {
     //CRUD: update
     @PutMapping(path = "/updateUser", consumes = "application/JSON")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        Optional<User> userFound = userservice.findUserById(user.getUserId());
+        Optional<User> userFound = userservice.findUserById(user.getUserUUID());
         Optional<User> userUpdate = userFound;
 
         HttpHeaders headers = new HttpHeaders();

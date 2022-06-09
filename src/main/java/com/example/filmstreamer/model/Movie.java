@@ -2,19 +2,23 @@ package com.example.filmstreamer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 @Entity(name="Movie")
 @Table(name="MOVIE_TABLE")
+
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "MOVIE_ID")
-    private long movieId;
+    @GeneratedValue (generator = "uuid2")
+    @GenericGenerator (name = "uuid2", strategy = "uuid2")
+    @Column (name = "MOVIE_UUID", columnDefinition = "BINARY (16)")
+    private UUID movieUUID;
     @Column(name = "MOVIE_TITLE")
     private String title;
     @Column(name = "MOVIE_RELEASING")
