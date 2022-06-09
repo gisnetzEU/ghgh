@@ -1,5 +1,6 @@
 package com.example.filmstreamer.configuration;
 
+import com.example.filmstreamer.model.View;
 import com.github.javafaker.Faker;
 import com.example.filmstreamer.model.User;
 import com.example.filmstreamer.service.UserService;
@@ -13,7 +14,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Component
@@ -78,11 +80,17 @@ public class ApplicationCommandRunner implements CommandLineRunner {
 
     private void createViewsFaker(Faker faker) {
         logger.info("Welcome to the create views Faker");
-        Optional<Iterable<Movie>> movies= movieService.getAllMovies();
-        Optional<Iterable<User>> users = userService.getAllUsers();
-        for (int i = 1; i <= 100; i++) {
-
-
+        Iterable<Movie> movies= movieService.getAllMovies().get();
+        Iterable<User> users = userService.getAllUsers().get();
+        List<User> usersList = new ArrayList<User>();
+        for (User user : users) {
+            usersList.add(user);
+        }
+        for(Movie movie: movies) {
+            Random rand = new Random();
+            User randomUser = usersList.get(rand.nextInt(usersList.size()));
+            View view = new View(randomUser, movie);
+            viewService.createView(view);
         }
         logger.info("finishing create views Faker ...");
     }
