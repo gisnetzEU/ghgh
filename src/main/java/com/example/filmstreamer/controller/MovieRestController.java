@@ -83,8 +83,8 @@ public class MovieRestController {
 
 
     //CRUD: create movie
-    @PostMapping(path = "/addMovie", consumes = "application/JSON")
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
+    @PostMapping(path = "/addMovie/{movie}", consumes = "application/JSON")
+    public ResponseEntity<Movie> addMovie(@PathVariable Movie movie) {
         Optional<Movie> movieCreated = movieservice.createMovie(movie);
 
         HttpHeaders headers = new HttpHeaders();
