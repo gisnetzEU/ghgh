@@ -64,6 +64,23 @@ public class MovieRestController {
         }
     }
 
+    //CRUD: read, find movies by title
+    @GetMapping(path = "/getMoviesByTitle/{title}")
+    public ResponseEntity<Iterable<Movie>> findMoviesByTitle(@PathVariable String title) {
+        Optional<Iterable<Movie>> moviesFound = movieservice.findMoviesByTitle(title);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("operation", "getMoviesByTitle");
+
+        if (moviesFound.isPresent()) {
+            headers.add("operationStatus", "success");
+            return ResponseEntity.accepted().headers(headers).body(moviesFound.get());
+        } else {
+            headers.add("operationStatus", "not Found");
+            return ResponseEntity.accepted().headers(headers).body(null);
+        }
+    }
+
 
     //CRUD: create movie
     @PostMapping(path = "/addMovie", consumes = "application/JSON")
@@ -161,20 +178,5 @@ public class MovieRestController {
         }
     }
 
-    //CRUD: read, find movies by title
-    @GetMapping(path = "/getMoviesByTitle")
-    public ResponseEntity<Iterable<Movie>> findMoviesByTitle(@RequestParam String title) {
-        Optional<Iterable<Movie>> moviesFound = movieservice.findMoviesByTitle(title);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("operation", "getMoviesByTitle");
-
-        if (moviesFound.isPresent()) {
-            headers.add("operationStatus", "success");
-            return ResponseEntity.accepted().headers(headers).body(moviesFound.get());
-        } else {
-            headers.add("operationStatus", "not Found");
-            return ResponseEntity.accepted().headers(headers).body(null);
-        }
-    }
 }
