@@ -3,13 +3,14 @@ package com.example.filmstreamer.model;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
 @Entity(name="View")
 @Table(name="VIEW_TABLE")
-public class View {
+public class View implements Serializable {
 
     @Id
     @GeneratedValue (generator = "uuid2")

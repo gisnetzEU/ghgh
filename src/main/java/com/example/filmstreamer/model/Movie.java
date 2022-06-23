@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Entity(name="Movie")
 @Table(name="MOVIE_TABLE")
 
-public class Movie {
+public class Movie implements Serializable {
 
     @Id
     @GeneratedValue (generator = "uuid2")
