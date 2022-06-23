@@ -81,7 +81,6 @@ public class MovieRestController {
         }
     }
 
-
     //CRUD: create movie
     @PostMapping(path = "/createMovie", consumes = "application/json")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
@@ -99,10 +98,8 @@ public class MovieRestController {
         }
     }
 
-
-
     //CRUD: update movie
-    @PutMapping(path = "/updateMovie", consumes = "application/JSON")
+    @PostMapping(path = "/updateMovie", consumes = "application/json")
     public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
         Optional<Movie> movieFound = movieservice.findMovieById(movie.getMovieUUID());
         Optional<Movie> movieUpdate = movieFound;
