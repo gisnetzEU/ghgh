@@ -2,14 +2,21 @@ package com.example.filmstreamer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
+
 @Entity(name="Movie")
 @Table(name="MOVIE_TABLE")
 
@@ -44,6 +51,17 @@ public class Movie implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
+
+    @CreationTimestamp
+    private Instant createdAt;
+    @UpdateTimestamp
+    private Instant updatedAt;
+    @CreatedBy
+    private String createdBy;
+    @LastModifiedBy
+    private String updatedBy;
+    @Version
+    Long version;
 
     public Movie(String title, int releaseYear, int duration, String directing,
                  String casting, String synopsis, String genre, String ageRating,
