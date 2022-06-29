@@ -53,14 +53,19 @@ public class Movie implements Serializable {
     private List<View> views = new ArrayList<>();
 
     @CreationTimestamp
+    @Column(name = "CREATED_AT")
     private Instant createdAt;
     @UpdateTimestamp
+    @Column(name = "UPDATED_AT")
     private Instant updatedAt;
     @CreatedBy
+    @Column(name = "CREATED_BY")
     private String createdBy;
     @LastModifiedBy
+    @Column(name = "UPDATED_BY")
     private String updatedBy;
     @Version
+    @Column(name = "VERSION")
     Long version;
 
     public Movie(String title, int releaseYear, int duration, String directing,
