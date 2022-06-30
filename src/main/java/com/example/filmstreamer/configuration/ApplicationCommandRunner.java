@@ -37,9 +37,9 @@ public class ApplicationCommandRunner implements CommandLineRunner {
         // Faker DB date creator block
 
         Faker faker = new Faker();
-        createMoviesFaker(faker);
-        createUsersFaker(faker);
-        createViewsFaker(faker);
+        //createMoviesFaker(faker);
+        //createUsersFaker(faker);
+        //createViewsFaker(faker);
 
     }
 
