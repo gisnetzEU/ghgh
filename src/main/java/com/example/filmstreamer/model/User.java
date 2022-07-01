@@ -32,7 +32,7 @@ public class User implements Serializable {
     private String userEmail;
     @JsonIgnore
     @Column(name = "USER_PASSWORD")
-    private int password;
+    private String password;
     @Column(name = "USER_ROL")
     private String userRol;
     @Column(name = "USER_FIRSTNAME")
@@ -67,7 +67,7 @@ public class User implements Serializable {
     @Column(name = "VERSION")
     Long version;
 
-    public User(String userEmail, int password, String userRol,
+    public User(String userEmail, String password, String userRol,
                 String userFirstName, String userLastName, LocalDate birthDate) {
         this.userEmail = userEmail;
         this.password = password;

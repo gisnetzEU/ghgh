@@ -42,3 +42,9 @@ VALUES
 'On a school trip, high school senior Peter Parker visits a Columbia University genetics laboratory with his friend Harry Osborn and his crush Mary Jane Watson. There, a genetically engineered "super-spider" bites him and he falls ill upon returning home. Meanwhile, Harry´s father Norman Osborn, a scientist and the founder and owner of Oscorp, tries to secure an important military contract. He experiments on himself with an unstable performance-enhancing chemical and goes insane, killing his assistant.',
 121, 12, 'spiderman.jpg', 'spiderman.mp4', 'ADMIN', NOW(), 'ADMIN', NOW(), 0);
 
+INSERT INTO
+USER_TABLE (USER_UUID, USER_EMAIL, USER_PASSWORD, USER_ROL, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTHDATE, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT, VERSION)
+VALUES
+
+(UUID(), 'rick@sanchez.edu', '1234', 'USER', 'Rick', 'Sánchez', CURDATE(), 'ADMIN', NOW(), 'ADMIN', NOW(), 0),
+(UUID(), 'john@doe.com', '1234', 'USER', 'John', 'Doe', CURDATE(), 'ADMIN', NOW(), 'ADMIN', NOW(), 0);

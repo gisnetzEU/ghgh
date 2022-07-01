@@ -130,7 +130,7 @@ public class UserRestController {
                 headers.add("user email", "to be updated");
                 mustUpdate = true;
             }
-            if((user.getPassword() != userFound.get().getPassword()) && (user.getPassword() != 0)) {
+            if((user.getPassword() != userFound.get().getPassword()) && (user.getPassword().equals(""))) {
                 userUpdate.get().setPassword(user.getPassword());
                 headers.add("password", "to be updated");
                 mustUpdate = true;

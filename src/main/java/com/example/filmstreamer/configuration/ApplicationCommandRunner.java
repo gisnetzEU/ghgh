@@ -70,7 +70,7 @@ public class ApplicationCommandRunner implements CommandLineRunner {
             String userLastName = name[1];
             LocalDate birthDate = LocalDate.now();
             String userEmail = userLastName + "@movie.edu";
-            int password = 1234;
+            String password = "1234";
             String userRol = "user";
             User user = new User(userEmail, password, userRol, userFirstName, userLastName, birthDate);
             userService.createUser(user);
