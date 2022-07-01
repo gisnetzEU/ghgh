@@ -2,17 +2,25 @@ package com.example.filmstreamer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Getter @Setter @ToString @EqualsAndHashCode @NoArgsConstructor @AllArgsConstructor
+
 @Entity(name="User")
 @Table(name="USER_TABLE")
+
 public class User implements Serializable {
 
     @Id
@@ -37,6 +45,27 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
+
+    @JsonIgnore
+    @CreationTimestamp
+    @Column(name = "CREATED_AT")
+    private Instant createdAt;
+    @JsonIgnore
+    @UpdateTimestamp
+    @Column(name = "UPDATED_AT")
+    private Instant updatedAt;
+    @JsonIgnore
+    @CreatedBy
+    @Column(name = "CREATED_BY")
+    private String createdBy;
+    @JsonIgnore
+    @LastModifiedBy
+    @Column(name = "UPDATED_BY")
+    private String updatedBy;
+    @JsonIgnore
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 
     public User(String userEmail, int password, String userRol,
                 String userFirstName, String userLastName, LocalDate birthDate) {

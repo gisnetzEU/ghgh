@@ -52,18 +52,23 @@ public class Movie implements Serializable {
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
     private List<View> views = new ArrayList<>();
 
+    @JsonIgnore
     @CreationTimestamp
     @Column(name = "CREATED_AT")
     private Instant createdAt;
+    @JsonIgnore
     @UpdateTimestamp
     @Column(name = "UPDATED_AT")
     private Instant updatedAt;
+    @JsonIgnore
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
+    @JsonIgnore
     @LastModifiedBy
     @Column(name = "UPDATED_BY")
     private String updatedBy;
+    @JsonIgnore
     @Version
     @Column(name = "VERSION")
     Long version;
