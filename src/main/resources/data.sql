@@ -40,11 +40,15 @@ VALUES
 
 (UUID(), 'Spider-Man', 'Sam Raimi', 'Tobey Maguire, Willem Dafoe, Kirsten Dunst, James Franco', 2002, 'Action',
 'On a school trip, high school senior Peter Parker visits a Columbia University genetics laboratory with his friend Harry Osborn and his crush Mary Jane Watson. There, a genetically engineered "super-spider" bites him and he falls ill upon returning home. Meanwhile, Harry´s father Norman Osborn, a scientist and the founder and owner of Oscorp, tries to secure an important military contract. He experiments on himself with an unstable performance-enhancing chemical and goes insane, killing his assistant.',
-121, 12, 'spiderman.jpg', 'spiderman.mp4', 'ADMIN', NOW(), 'ADMIN', NOW(), 0);
+121, 12, 'spiderman.jpg', 'spiderman.mp4', 'ADMIN', NOW(), 'ADMIN', NOW(), 0),
+
+(UUID(), 'Macbeth', 'Roman Polanski', 'Jon Finch, Francesca Annis, Martin Shaw, Nicholas Selby, John Stride', 1971, 'Drama',
+'In the Middle Ages, a Norwegian invasion of Scotland is suppressed by Macbeth, Thane of Glamis, and Banquo. A traitor, the Thane of Cawdor, is captured, and King Duncan decrees Macbeth shall be awarded the title of Cawdor. Macbeth and Banquo do not hear of this news; when out riding, they happen upon Three Witches, who hail Macbeth as Thane of Cawdor and future King, and Banquo as lesser and greater. At their camp, nobles arrive and inform Macbeth he has been named the Thane of Cawdor, with Macbeth simultaneously awed and frightened at the prospect of usurping Duncan, in further fulfilment of the prophecy. He writes a letter to Lady Macbeth, who is delighted at the news. However, she fears her husband has too much good nature, and vows to be cruel for him. Duncan names his eldest son, Malcolm, Prince of Cumberland, and thus heir apparent, to the displeasure of Macbeth and Malcolm\'s brother Donalbain. The royal family and nobles then spend the night at Macbeth\'s castle, with Lady Macbeth greeting the King and dancing with him with duplicity.',
+140, 12, 'macbeth.jpg', 'macbeth.mp4', 'ADMIN', NOW(), 'ADMIN', NOW(), 0);
 
 INSERT INTO
 USER_TABLE (USER_UUID, USER_EMAIL, USER_PASSWORD, USER_ROL, USER_FIRSTNAME, USER_LASTNAME, USER_BIRTHDATE, CREATED_BY, CREATED_AT, UPDATED_BY, UPDATED_AT, VERSION)
 VALUES
 
-(UUID(), 'rick@sanchez.edu', '1234', 'USER', 'Rick', 'Sánchez', CURDATE(), 'ADMIN', NOW(), 'ADMIN', NOW(), 0),
-(UUID(), 'john@doe.com', '1234', 'USER', 'John', 'Doe', CURDATE(), 'ADMIN', NOW(), 'ADMIN', NOW(), 0);
+(UUID(), 'rick@sanchez.edu', 'F6DP3g9DFlXrfyUs7IFxCg==', 'USER', 'Rick', 'Sánchez', CURRENT_DATE, 'ADMIN', NOW(), 'ADMIN', NOW(), 0),
+(UUID(), 'john@doe.com', 'F6DP3g9DFlXrfyUs7IFxCg==', 'USER', 'John', 'Doe', CURRENT_DATE, 'ADMIN', NOW(), 'ADMIN', NOW(), 0);
