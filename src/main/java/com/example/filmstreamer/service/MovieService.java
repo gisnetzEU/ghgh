@@ -46,12 +46,16 @@ public class MovieService {
         }
     }
 
+    public Optional<Iterable<Movie>> findMoviesByTitleContaining(String titlePart) {
+        return movieRepository.findMoviesByTitleContainingIgnoreCase(titlePart);
+    }
+
     public Optional<Iterable<Movie>> findMoviesByTitle(String title){
-        return movieRepository.findMoviesByTitle(title);
+        return movieRepository.findMoviesByTitleIgnoreCase(title);
     }
 
     public Optional<Movie> deleteMovieByTitle(String title){
-        return movieRepository.deleteMovieByTitle(title);
+        return movieRepository.deleteMovieByTitleIgnoreCase(title);
     }
 
     public int count() {

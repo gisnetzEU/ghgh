@@ -81,6 +81,23 @@ public class MovieRestController {
         }
     }
 
+    //CRUD: read, find movies by title containing a text
+    @GetMapping(path = "/getMoviesByTitleContaining/{text}")
+    public ResponseEntity<Iterable<Movie>> findMoviesByTitleContaining(@PathVariable String text) {
+        Optional<Iterable<Movie>> moviesFound = movieservice.findMoviesByTitleContaining(text);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("operation", "getMoviesByTitleContaining");
+
+        if (moviesFound.isPresent()) {
+            headers.add("operationStatus", "success");
+            return ResponseEntity.accepted().headers(headers).body(moviesFound.get());
+        } else {
+            headers.add("operationStatus", "not Found");
+            return ResponseEntity.accepted().headers(headers).body(null);
+        }
+    }
+
     //CRUD: create movie
     @PostMapping(path = "/createMovie", consumes = "application/json")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
