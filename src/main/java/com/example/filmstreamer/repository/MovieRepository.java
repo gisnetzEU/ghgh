@@ -2,6 +2,7 @@ package com.example.filmstreamer.repository;
 
 import com.example.filmstreamer.model.Movie;
 import org.springframework.data.repository.CrudRepository;
+
 import java.util.Optional;
 import java.util.UUID;
 
